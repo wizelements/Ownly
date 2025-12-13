@@ -1,0 +1,640 @@
+// Ownly Database Schema
+// Last updated: 2025-01-01
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER & AUTH MODELS
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  clerkId       String    @unique
+  email         String    @unique
+  firstName     String?
+  lastName      String?
+  phone         String?
+  avatar        String?
+  role          UserRole  @default(CUSTOMER)
+  onboarded     Boolean   @default(false)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastActiveAt  DateTime  @default(now())
+  
+  // Relationships
+  businesses    Business[]
+  payments      Payment[]
+  documents     Document[]
+  tasks         Task[]
+  notes         Note[]
+  
+  @@index([clerkId])
+  @@index([email])
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  SUPPORT
+  AGENT
+}
+
+// ============================================
+// BUSINESS & LLC MODELS
+// ============================================
+
+model Business {
+  id                String           @id @default(cuid())
+  userId            String
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Basic Info
+  name              String
+  legalName         String
+  ein               String?          @unique
+  type              BusinessType     @default(LLC)
+  state             USState
+  formationDate     DateTime?
+  
+  // Formation Details
+  formationStatus   FormationStatus  @default(DRAFT)
+  registeredAgent   String?
+  businessAddress   Json             // {street, city, state, zip}
+  mailingAddress    Json?
+  
+  // BOI (Beneficial Ownership Information)
+  boiStatus         BOIStatus        @default(PENDING)
+  boiFiledAt        DateTime?
+  
+  // Plan & Billing
+  plan              Plan             @default(FOUNDER)
+  successShield     Boolean          @default(true)
+  shieldExpiresAt   DateTime?
+  
+  // Status
+  active            Boolean          @default(true)
+  dissolved         Boolean          @default(false)
+  dissolvedAt       DateTime?
+  
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  
+  // Relationships
+  members           BusinessMember[]
+  bankAccounts      BankAccount[]
+  filings           ComplianceFiling[]
+  taxes             TaxRecord[]
+  invoices          Invoice[]
+  contracts         Contract[]
+  insurance         Insurance[]
+  documents         Document[]
+  
+  @@index([userId])
+  @@index([ein])
+  @@index([state])
+}
+
+enum BusinessType {
+  LLC
+  SINGLE_MEMBER_LLC
+  MULTI_MEMBER_LLC
+  S_CORP
+  C_CORP
+  NONPROFIT
+  DAO
+}
+
+enum USState {
+  AL
+  AK
+  AZ
+  AR
+  CA
+  CO
+  CT
+  DE
+  FL
+  GA
+  HI
+  ID
+  IL
+  IN
+  IA
+  KS
+  KY
+  LA
+  ME
+  MD
+  MA
+  MI
+  MN
+  MS
+  MO
+  MT
+  NE
+  NV
+  NH
+  NJ
+  NM
+  NY
+  NC
+  ND
+  OH
+  OK
+  OR
+  PA
+  RI
+  SC
+  SD
+  TN
+  TX
+  UT
+  VT
+  VA
+  WA
+  WV
+  WI
+  WY
+}
+
+enum FormationStatus {
+  DRAFT
+  SUBMITTED
+  PROCESSING
+  APPROVED
+  REJECTED
+  ACTIVE
+}
+
+enum BOIStatus {
+  PENDING
+  FILED
+  EXEMPT
+  FAILED
+}
+
+enum Plan {
+  FOUNDER
+  TEAM
+  ENTERPRISE
+}
+
+model BusinessMember {
+  id                String    @id @default(cuid())
+  businessId        String
+  business          Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  name              String
+  email             String
+  ownership         Float     // Percentage 0-100
+  role              String    // Manager, Member, etc.
+  address           Json
+  
+  ssn               String?   @db.VarChar(11) // Encrypted
+  dateOfBirth       DateTime?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([businessId])
+}
+
+// ============================================
+// BANKING & PAYMENTS
+// ============================================
+
+model BankAccount {
+  id                String    @id @default(cuid())
+  businessId        String
+  business          Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  provider          BankProvider
+  accountId         String    @unique
+  accountName       String
+  accountType       String    // checking, savings
+  last4             String
+  balance           Float?
+  
+  connected         Boolean   @default(true)
+  primary           Boolean   @default(false)
+  
+  metadata          Json?     // Provider-specific data
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([businessId])
+}
+
+enum BankProvider {
+  MERCURY
+  RELAY
+  BREX
+  FOUND
+  NORTHONE
+  OTHER
+}
+
+model Payment {
+  id                String        @id @default(cuid())
+  userId            String
+  user              User          @relation(fields: [userId], references: [id])
+  
+  stripePaymentId   String        @unique
+  amount            Float
+  currency          String        @default("usd")
+  status            PaymentStatus
+  
+  plan              Plan
+  isRecurring       Boolean       @default(false)
+  
+  metadata          Json?
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  @@index([userId])
+  @@index([stripePaymentId])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+// ============================================
+// COMPLIANCE & FILINGS
+// ============================================
+
+model ComplianceFiling {
+  id                String        @id @default(cuid())
+  businessId        String
+  business          Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  type              FilingType
+  state             USState
+  year              Int
+  
+  dueDate           DateTime
+  filedDate         DateTime?
+  status            FilingStatus  @default(PENDING)
+  
+  confirmationNumber String?
+  amount            Float?
+  
+  metadata          Json?         // State-specific data
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  @@index([businessId])
+  @@index([dueDate])
+}
+
+enum FilingType {
+  ANNUAL_REPORT
+  FRANCHISE_TAX
+  BOI_FILING
+  BOI_UPDATE
+  REGISTERED_AGENT_CHANGE
+  ADDRESS_CHANGE
+  NAME_CHANGE
+  DISSOLUTION
+}
+
+enum FilingStatus {
+  PENDING
+  SCHEDULED
+  FILED
+  APPROVED
+  REJECTED
+  OVERDUE
+}
+
+// ============================================
+// TAX MANAGEMENT
+// ============================================
+
+model TaxRecord {
+  id                String    @id @default(cuid())
+  businessId        String
+  business          Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  year              Int
+  quarter           Int?      // 1-4 for quarterly, null for annual
+  
+  estimatedIncome   Float?
+  estimatedExpenses Float?
+  estimatedTax      Float?
+  
+  paidAmount        Float?
+  paidDate          DateTime?
+  
+  sCorpElection     Boolean   @default(false)
+  
+  metadata          Json?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([businessId])
+  @@index([year, quarter])
+}
+
+// ============================================
+// INVOICING & CONTRACTS
+// ============================================
+
+model Invoice {
+  id                String        @id @default(cuid())
+  businessId        String
+  business          Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  invoiceNumber     String        @unique
+  
+  clientName        String
+  clientEmail       String
+  clientAddress     Json?
+  
+  items             Json          // Array of line items
+  subtotal          Float
+  tax               Float         @default(0)
+  total             Float
+  
+  status            InvoiceStatus @default(DRAFT)
+  
+  issueDate         DateTime      @default(now())
+  dueDate           DateTime
+  paidDate          DateTime?
+  
+  notes             String?
+  terms             String?
+  
+  stripeInvoiceId   String?
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  @@index([businessId])
+  @@index([status])
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  VIEWED
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+model Contract {
+  id                String         @id @default(cuid())
+  businessId        String
+  business          Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  title             String
+  type              ContractType
+  
+  clientName        String
+  clientEmail       String
+  
+  value             Float?
+  
+  status            ContractStatus @default(DRAFT)
+  
+  content           String         @db.Text
+  
+  sentDate          DateTime?
+  signedDate        DateTime?
+  expiresDate       DateTime?
+  
+  docusignEnvelopeId String?       @unique
+  
+  metadata          Json?
+  
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  
+  @@index([businessId])
+}
+
+enum ContractType {
+  SERVICE_AGREEMENT
+  NDA
+  PROPOSAL
+  SOW
+  RETAINER
+  CUSTOM
+}
+
+enum ContractStatus {
+  DRAFT
+  SENT
+  VIEWED
+  SIGNED
+  EXPIRED
+  CANCELLED
+}
+
+// ============================================
+// INSURANCE
+// ============================================
+
+model Insurance {
+  id                String          @id @default(cuid())
+  businessId        String
+  business          Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  provider          String
+  policyNumber      String          @unique
+  type              InsuranceType
+  
+  coverage          Float           // Coverage amount
+  premium           Float           // Annual premium
+  
+  startDate         DateTime
+  endDate           DateTime
+  
+  status            InsuranceStatus @default(ACTIVE)
+  
+  documents         Json?           // Policy docs
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  @@index([businessId])
+}
+
+enum InsuranceType {
+  GENERAL_LIABILITY
+  PROFESSIONAL_LIABILITY
+  CYBER_LIABILITY
+  WORKERS_COMP
+  OTHER
+}
+
+enum InsuranceStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+// ============================================
+// DOCUMENTS & FILES
+// ============================================
+
+model Document {
+  id                String       @id @default(cuid())
+  userId            String?
+  user              User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessId        String?
+  business          Business?    @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  
+  name              String
+  type              DocumentType
+  category          String?
+  
+  url               String       // S3 URL
+  size              Int          // Bytes
+  mimeType          String
+  
+  metadata          Json?
+  
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  
+  @@index([userId])
+  @@index([businessId])
+}
+
+enum DocumentType {
+  ARTICLES_OF_ORGANIZATION
+  OPERATING_AGREEMENT
+  EIN_LETTER
+  BOI_CONFIRMATION
+  TAX_RETURN
+  BANK_STATEMENT
+  INVOICE
+  CONTRACT
+  INSURANCE_POLICY
+  OTHER
+}
+
+// ============================================
+// TASKS & PLAYBOOK
+// ============================================
+
+model Task {
+  id                String      @id @default(cuid())
+  userId            String
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  title             String
+  description       String?     @db.Text
+  category          TaskCategory
+  
+  status            TaskStatus  @default(TODO)
+  priority          TaskPriority @default(MEDIUM)
+  
+  dueDate           DateTime?
+  completedAt       DateTime?
+  
+  metadata          Json?       // Playbook-specific data
+  
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  @@index([userId])
+  @@index([status])
+}
+
+enum TaskCategory {
+  FORMATION
+  BANKING
+  TAX
+  COMPLIANCE
+  REVENUE
+  GROWTH
+  OTHER
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  BLOCKED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+// ============================================
+// NOTES & AI INTERACTIONS
+// ============================================
+
+model Note {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  title             String?
+  content           String    @db.Text
+  
+  tags              String[]
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([userId])
+}
+
+model AIConversation {
+  id                String    @id @default(cuid())
+  userId            String
+  
+  messages          Json      // Array of messages
+  
+  topic             String?
+  resolved          Boolean   @default(false)
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([userId])
+}
+
+// ============================================
+// ANALYTICS & METRICS
+// ============================================
+
+model Metric {
+  id                String    @id @default(cuid())
+  businessId        String?
+  
+  name              String
+  value             Float
+  unit              String?
+  
+  date              DateTime  @default(now())
+  
+  metadata          Json?
+  
+  @@index([businessId, name, date])
+}

@@ -1,0 +1,51 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist
+build
+.next
+.turbo
+out
+
+# Testing
+coverage
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# Docs (don't need in production)
+docs
+*.md
+!README.md
+
+# Development
+docker-compose.yml
+.docker
+
+# Git
+.git
+.gitignore
+
+# Apps we're not deploying
+apps/api
+apps/admin
+
+# Development files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
