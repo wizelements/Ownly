@@ -1,6 +1,11 @@
 # Ownly
 
-**"Your entire business in one place — from LLC to $1M."**
+![CI](https://github.com/wizelements/Ownly/actions/workflows/ci.yml/badge.svg)
+![CodeQL](https://github.com/wizelements/Ownly/actions/workflows/codeql.yml/badge.svg)
+
+**Your entire business in one place - from LLC to $1M.**
+
+---
 
 ## Overview
 
@@ -224,4 +229,4 @@ Proprietary - All rights reserved
 
 ---
 
-**Built with ❤️ to help everyone become their own boss**
+Built by [Cod3BlackAgency](https://github.com/wizelements)
