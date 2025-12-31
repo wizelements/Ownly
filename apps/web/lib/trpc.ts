@@ -1,6 +1,6 @@
 import { createTRPCReact } from '@trpc/react-query'
 import { httpBatchLink } from '@trpc/client'
-import { type AppRouter } from '../../api/src/routers'
+import type { AppRouter } from '../../api/src/routers'
 import superjson from 'superjson'
 
 export const trpc = createTRPCReact<AppRouter>()
@@ -17,13 +17,13 @@ export function getTRPCUrl() {
 
 export function getTRPCClient() {
   return trpc.createClient({
+    transformer: superjson,
     links: [
       httpBatchLink({
         url: getTRPCUrl(),
-        transformer: superjson,
         headers: () => {
           // Get Clerk session token
-          const token = (globalThis as any).__clerk_session_token
+          const token = (globalThis as unknown as { __clerk_session_token?: string }).__clerk_session_token
           return {
             authorization: token ? `Bearer ${token}` : '',
           }
