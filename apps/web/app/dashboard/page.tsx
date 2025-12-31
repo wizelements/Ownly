@@ -17,14 +17,19 @@ import { isDemoMode, demoUserData, demoStats } from '@/lib/demo'
 export default function DashboardPage() {
   const { user, isLoaded } = useAppUser()
   
+  // Skip tRPC queries in demo mode - just use demo data
+  const shouldSkip = isDemoMode || !isLoaded || !user
+  
   // Fetch user data with tRPC (skip in demo mode)
+  // @ts-expect-error - tRPC v10 with React Query v5 type mismatch
   const { data: userData, isLoading } = trpc.user.me.useQuery(undefined, {
-    enabled: !isDemoMode && isLoaded && !!user,
+    enabled: !shouldSkip,
   })
 
   // Fetch user stats (skip in demo mode)
+  // @ts-expect-error - tRPC v10 with React Query v5 type mismatch
   const { data: stats } = trpc.user.stats.useQuery(undefined, {
-    enabled: !isDemoMode && isLoaded && !!user,
+    enabled: !shouldSkip,
   })
 
   // Use demo data in demo mode
