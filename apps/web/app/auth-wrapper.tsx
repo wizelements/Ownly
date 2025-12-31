@@ -1,19 +1,24 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { DemoAuthProvider } from '@/lib/demo-auth-provider'
 import { isDemoMode } from '@/lib/demo'
-import { ReactNode } from 'react'
+import { ReactNode, lazy, Suspense } from 'react'
 
-const ClerkProvider = dynamic(
-  () => import('@clerk/nextjs').then((mod) => mod.ClerkProvider),
-  { ssr: false }
+// Only import Clerk when not in demo mode and on client side
+const ClerkProviderLazy = lazy(() => 
+  import('@clerk/nextjs').then((mod) => ({ default: mod.ClerkProvider }))
 )
 
 export function AuthWrapper({ children }: { children: ReactNode }) {
+  // In demo mode, never load Clerk
   if (isDemoMode) {
     return <DemoAuthProvider>{children}</DemoAuthProvider>
   }
 
-  return <ClerkProvider>{children}</ClerkProvider>
+  // In production mode with Clerk, use lazy loading with suspense
+  return (
+    <Suspense fallback={<>{children}</>}>
+      <ClerkProviderLazy>{children}</ClerkProviderLazy>
+    </Suspense>
+  )
 }

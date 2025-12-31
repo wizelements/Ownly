@@ -19,15 +19,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <AuthWrapper>
-      <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <AuthWrapper>
           <Providers>
             {children}
             <Toaster />
           </Providers>
-        </body>
-      </html>
-    </AuthWrapper>
+        </AuthWrapper>
+      </body>
+    </html>
   )
 }
