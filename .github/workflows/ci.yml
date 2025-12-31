@@ -159,6 +159,7 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ownly/database exec prisma generate
       - run: pnpm build
         env:
           SKIP_ENV_VALIDATION: true
