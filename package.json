@@ -2,7 +2,7 @@
   "name": "ownly",
   "version": "0.1.0",
   "private": true,
-  "description": "Your entire business in one place — from LLC to $1M",
+  "description": "Modern SaaS starter kit with Next.js, tRPC, Prisma, and Tailwind",
   "keywords": [
     "llc",
     "business",
@@ -14,9 +14,13 @@
     "dev": "turbo run dev --parallel",
     "dev:web": "turbo run dev --filter=web",
     "dev:api": "turbo run dev --filter=api",
-    "dev:admin": "turbo run dev --filter=admin",
     "build": "turbo run build",
     "test": "turbo run test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "test:urls": "npx tsx e2e/api-urls.test.ts",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
@@ -26,7 +30,7 @@
     "db:migrate": "turbo run db:migrate",
     "db:studio": "turbo run db:studio",
     "db:seed": "turbo run db:seed",
-    "prepare": "husky install"
+    "prepare": "husky install || true"
   },
   "engines": {
     "node": ">=20.0.0",
@@ -38,6 +42,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@types/node": "^20.11.5",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
@@ -49,6 +54,7 @@
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "tsx": "^4.7.0",
     "turbo": "^1.12.4",
     "typescript": "^5.3.3"
   },

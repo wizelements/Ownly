@@ -1,0 +1,85 @@
+name: Deploy Preview E2E
+
+on:
+  deployment_status:
+
+jobs:
+  e2e-preview:
+    name: E2E on Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Preview'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      
+      - run: pnpm install --frozen-lockfile
+      
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+      
+      - name: Run E2E Tests on Preview
+        run: pnpm test:e2e:chromium
+        env:
+          E2E_BASE_URL: ${{ github.event.deployment_status.target_url }}
+      
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-preview-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 7
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const { owner, repo } = context.repo
+            const sha = context.payload.deployment.sha
+            
+            // Find PR by commit SHA
+            const prs = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: 'open'
+            })
+            
+            const pr = prs.data.find(p => p.head.sha === sha)
+            if (!pr) return
+            
+            const status = '${{ job.status }}' === 'success' ? '✅' : '❌'
+            const emoji = '${{ job.status }}' === 'success' ? '🎉' : '🚨'
+            
+            const body = `
+            ## ${emoji} E2E Test Results
+            
+            **Status:** ${status} ${{ job.status }}
+            **Preview URL:** ${{ github.event.deployment_status.target_url }}
+            **Workflow:** [View Details](${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId})
+            
+            <details>
+            <summary>Test Details</summary>
+            
+            - Browser: Chromium
+            - Tests: Playwright E2E Suite
+            - Report: Available in workflow artifacts
+            
+            </details>
+            `
+            
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: pr.number,
+              body
+            })
