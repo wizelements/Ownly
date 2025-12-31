@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 15
     if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Preview'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
       - uses: pnpm/action-setup@v2
         with:
