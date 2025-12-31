@@ -1,31 +1,63 @@
-Proprietary License
+# Ownly Starter Kit - Commercial License Agreement
 
-Copyright (c) 2025 Ownly, Inc.
+**Version 1.0 — Effective Date: January 2025**
 
-All rights reserved.
+## 1. Grant of License
 
-This software and associated documentation files (the "Software") are the proprietary 
-property of Ownly, Inc. and are protected by copyright law and international treaties.
+Upon purchase, the Licensor (Cod3BlackAgency / WizElements) grants you (the "Licensee") a non-exclusive, perpetual, worldwide license to:
 
-RESTRICTIONS:
+- **Use** the source code to build unlimited applications for yourself or clients
+- **Modify** the source code to fit your project requirements
+- **Deploy** applications built with this code to production environments
+- **Create derivative works** for commercial or personal use
 
-1. You may not copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
-   of the Software without explicit written permission from Ownly, Inc.
+## 2. Permitted Uses
 
-2. You may not use the Software for any commercial purpose without a valid license 
-   agreement with Ownly, Inc.
+✅ Build SaaS applications for yourself or clients  
+✅ Use in client projects (freelance/agency work)  
+✅ Modify all source code freely  
+✅ Deploy to any hosting provider  
+✅ Use in commercial products you sell to end users  
+✅ Create multiple projects from a single license  
 
-3. You may not reverse engineer, decompile, or disassemble the Software.
+## 3. Restrictions
 
-4. Any use of the Software must comply with all applicable laws and regulations.
+❌ **No Redistribution**: You may NOT resell, redistribute, sublicense, or share the original source code or substantially similar derivative works as a template, starter kit, or boilerplate  
+❌ **No Competing Products**: You may NOT create and sell competing templates or starter kits based on this code  
+❌ **No Open Source**: You may NOT publish the code or derivatives under an open-source license  
 
-DISCLAIMER:
+## 4. Ownership
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The Licensor retains all intellectual property rights to the original code. This license grants usage rights only; no ownership transfer occurs.
 
-For licensing inquiries, please contact: legal@ownly.com
+## 5. Support & Updates
+
+- **Documentation**: Included with purchase
+- **Updates**: Bug fixes and security updates for 12 months from purchase date
+- **Support**: GitHub Issues for bug reports
+
+Extended support available with Team license tier.
+
+## 6. Warranty Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## 7. Refund Policy
+
+72-hour refund window from the time of purchase if the product does not work as described. Refunds are not available after this period or if substantial code has been accessed/downloaded.
+
+## 8. Termination
+
+This license terminates automatically if you breach any of its terms. Upon termination, you must destroy all copies of the source code.
+
+## 9. Governing Law
+
+This agreement is governed by the laws of the United States. Any disputes shall be resolved in the courts of the State of [Your State].
+
+---
+
+**By purchasing and using this software, you agree to these terms.**
+
+© 2025 Cod3BlackAgency / WizElements. All rights reserved.

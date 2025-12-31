@@ -1,6 +1,6 @@
 'use client'
 
-import { useUser } from '@clerk/nextjs'
+import { useAppUser } from '@/lib/auth'
 import { trpc } from '@/lib/trpc'
 import { Button } from '@/components/ui/button'
 import { 
@@ -12,21 +12,26 @@ import {
   ArrowRight
 } from 'lucide-react'
 import Link from 'next/link'
+import { isDemoMode, demoUserData, demoStats } from '@/lib/demo'
 
 export default function DashboardPage() {
-  const { user, isLoaded } = useUser()
+  const { user, isLoaded } = useAppUser()
   
-  // Fetch user data with tRPC
+  // Fetch user data with tRPC (skip in demo mode)
   const { data: userData, isLoading } = trpc.user.me.useQuery(undefined, {
-    enabled: isLoaded && !!user,
+    enabled: !isDemoMode && isLoaded && !!user,
   })
 
-  // Fetch user stats
+  // Fetch user stats (skip in demo mode)
   const { data: stats } = trpc.user.stats.useQuery(undefined, {
-    enabled: isLoaded && !!user,
+    enabled: !isDemoMode && isLoaded && !!user,
   })
 
-  if (!isLoaded || isLoading) {
+  // Use demo data in demo mode
+  const effectiveUserData = isDemoMode ? demoUserData : userData
+  const effectiveStats = isDemoMode ? demoStats : stats
+
+  if (!isLoaded || (!isDemoMode && isLoading)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
@@ -50,7 +55,7 @@ export default function DashboardPage() {
     )
   }
 
-  const hasBusinesses = (userData?.businesses?.length ?? 0) > 0
+  const hasBusinesses = (effectiveUserData?.businesses?.length ?? 0) > 0
 
   return (
     <div className="min-h-screen bg-background">
@@ -85,21 +90,28 @@ export default function DashboardPage() {
           </p>
         </div>
 
+        {/* Demo Mode Banner */}
+        {isDemoMode && (
+          <div className="mb-4 rounded-lg border border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 p-3 text-center text-sm">
+            <span className="font-medium">Demo Mode</span> — Viewing with sample data. No Clerk authentication required.
+          </div>
+        )}
+
         {/* Stats Grid */}
         <div className="grid gap-4 md:grid-cols-3 mb-8">
           <StatsCard
             title="Active Businesses"
-            value={stats?.businessCount ?? 0}
+            value={effectiveStats?.businessCount ?? 0}
             icon={<Building2 className="h-4 w-4" />}
           />
           <StatsCard
             title="Paid Invoices"
-            value={stats?.invoiceCount ?? 0}
+            value={effectiveStats?.invoiceCount ?? 0}
             icon={<FileText className="h-4 w-4" />}
           />
           <StatsCard
             title="Total Revenue"
-            value={`$${((stats?.totalRevenue ?? 0) / 100).toLocaleString()}`}
+            value={`$${((effectiveStats?.totalRevenue ?? 0) / 100).toLocaleString()}`}
             icon={<DollarSign className="h-4 w-4" />}
           />
         </div>
@@ -119,7 +131,7 @@ export default function DashboardPage() {
               </div>
               
               <div className="grid gap-4 md:grid-cols-2">
-                {userData?.businesses?.map(business => (
+                {effectiveUserData?.businesses?.map((business: any) => (
                   <BusinessCard key={business.id} business={business} />
                 ))}
               </div>
