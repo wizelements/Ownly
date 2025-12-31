@@ -16,6 +16,8 @@ export async function createContext({ req, res }: CreateExpressContextOptions) {
       // Verify the Clerk token
       const payload = await verifyToken(token, {
         secretKey: process.env.CLERK_SECRET_KEY!,
+        issuer: process.env.CLERK_ISSUER || undefined,
+        authorizedParties: process.env.CLERK_AUTHORIZED_PARTIES?.split(',') || undefined,
       })
 
       userId = payload.sub

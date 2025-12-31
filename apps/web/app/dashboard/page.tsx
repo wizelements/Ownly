@@ -170,7 +170,7 @@ export default function DashboardPage() {
             <Building2 className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
             <h2 className="text-2xl font-bold mb-2">Start Your First Business</h2>
             <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              Form your LLC in minutes. We'll handle the paperwork, filings, and compliance
+              Form your LLC in minutes. We&apos;ll handle the paperwork, filings, and compliance
               so you can focus on building your dream.
             </p>
             <Link href="/dashboard/form">

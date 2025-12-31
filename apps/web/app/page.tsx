@@ -15,8 +15,7 @@ import {
   Quote,
   Gift,
   Download,
-  DollarSign,
-  Users
+  DollarSign
 } from 'lucide-react'
 
 export default function HomePage() {
@@ -37,7 +36,7 @@ export default function HomePage() {
               The Problem
             </Link>
             <Link href="#features" className="text-sm font-medium hover:text-primary">
-              What's Inside
+              What&apos;s Inside
             </Link>
             <Link href="#pricing" className="text-sm font-medium hover:text-primary">
               Pricing
@@ -112,8 +111,8 @@ export default function HomePage() {
               <Gift className="h-10 w-10 text-primary mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">Free: The SaaS Foundation Checklist</h2>
               <p className="text-muted-foreground mb-6">
-                47 things every developer forgets — until it's too late.<br />
-                Don't ship with missing pieces.
+                47 things every developer forgets — until it&apos;s too late.<br />
+                Don&apos;t ship with missing pieces.
               </p>
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input 
@@ -142,7 +141,7 @@ export default function HomePage() {
                 You know the feeling
               </h2>
               <p className="text-lg text-muted-foreground">
-                It's 2 AM. You're excited about your new SaaS idea.
+                It&apos;s 2 AM. You&apos;re excited about your new SaaS idea.
               </p>
             </div>
 
@@ -150,17 +149,17 @@ export default function HomePage() {
               <ProblemCard
                 icon={<Clock className="h-6 w-6 text-orange-500" />}
                 title="Week 1: Auth setup"
-                description="You're debugging middleware, reading docs, and wondering why session management is so complicated."
+                description="You&apos;re debugging middleware, reading docs, and wondering why session management is so complicated."
               />
               <ProblemCard
                 icon={<Database className="h-6 w-6 text-orange-500" />}
                 title="Week 2: Database schema"
-                description="Users, subscriptions, teams, audit logs... You've designed this same schema five times before."
+                description="Users, subscriptions, teams, audit logs... You&apos;ve designed this same schema five times before."
               />
               <ProblemCard
                 icon={<Layout className="h-6 w-6 text-orange-500" />}
                 title="Week 3: Dashboard UI"
-                description="That beautiful sidebar layout in your head? Still just a wireframe. You're fighting CSS."
+                description="That beautiful sidebar layout in your head? Still just a wireframe. You&apos;re fighting CSS."
               />
               
               <div className="text-center pt-8">
@@ -168,8 +167,8 @@ export default function HomePage() {
                   Three weeks in. Zero lines of <em>your</em> product.
                 </p>
                 <p className="text-xl font-bold mt-4">
-                  The graveyard of unshipped products isn't filled with bad ideas.<br />
-                  It's filled with good ideas that died in setup purgatory.
+                  The graveyard of unshipped products isn&apos;t filled with bad ideas.<br />
+                  It&apos;s filled with good ideas that died in setup purgatory.
                 </p>
               </div>
             </div>
@@ -204,7 +203,7 @@ export default function HomePage() {
                 <p><span className="text-green-500">$</span> pnpm install</p>
                 <p><span className="text-green-500">$</span> pnpm dev</p>
                 <p className="text-muted-foreground mt-4"># Open localhost:3000</p>
-                <p className="text-primary"># You're building.</p>
+                <p className="text-primary"># You&apos;re building.</p>
               </div>
             </div>
           </div>
@@ -215,10 +214,10 @@ export default function HomePage() {
           <div className="container">
             <div className="mx-auto max-w-[700px] text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-                What's inside the box
+                What&apos;s inside the box
               </h2>
               <p className="text-lg text-muted-foreground">
-                Everything you need to launch — nothing you don't
+                Everything you need to launch — nothing you don&apos;t
               </p>
             </div>
 
@@ -232,7 +231,7 @@ export default function HomePage() {
               <FeatureCard
                 icon={<Database className="h-8 w-8 text-primary" />}
                 title="13 Database Models"
-                description="The schema you'd build anyway. Users, teams, subscriptions, invoices, audit logs."
+                description="The schema you&apos;d build anyway. Users, teams, subscriptions, invoices, audit logs."
                 items={['Prisma ORM', 'PostgreSQL ready', 'Seed data included']}
               />
               <FeatureCard
@@ -385,9 +384,9 @@ export default function HomePage() {
                 Perfect for you if...
               </h3>
               <ul className="space-y-3 text-muted-foreground">
-                <li>You're a solo developer launching a SaaS</li>
-                <li>You're an agency building client projects</li>
-                <li>You're tired of reinventing wheels</li>
+                <li>You&apos;re a solo developer launching a SaaS</li>
+                <li>You&apos;re an agency building client projects</li>
+                <li>You&apos;re tired of reinventing wheels</li>
                 <li>You want to learn modern patterns from working code</li>
                 <li>You need something better than create-next-app</li>
               </ul>
@@ -399,9 +398,9 @@ export default function HomePage() {
               </h3>
               <ul className="space-y-3 text-muted-foreground">
                 <li>You need a no-code solution</li>
-                <li>You've never used React</li>
+                <li>You&apos;ve never used React</li>
                 <li>You want a hosted, finished product</li>
-                <li>You're looking for a tutorial</li>
+                <li>You&apos;re looking for a tutorial</li>
               </ul>
             </div>
           </div>
@@ -499,7 +498,7 @@ function TestimonialCard({ quote, author, role }: {
   return (
     <div className="rounded-lg border bg-card p-6">
       <Quote className="h-6 w-6 text-primary/30 mb-4" />
-      <p className="text-sm mb-4">"{quote}"</p>
+      <p className="text-sm mb-4">&quot;{quote}&quot;</p>
       <div className="text-sm">
         <p className="font-medium">{author}</p>
         <p className="text-muted-foreground">{role}</p>

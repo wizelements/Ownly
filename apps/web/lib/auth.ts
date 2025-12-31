@@ -1,8 +1,11 @@
 'use client'
 
+import { useUser, useAuth } from '@clerk/nextjs'
 import { isDemoMode, demoUser } from './demo'
 
 export function useAppUser() {
+  const clerkUser = useUser()
+  
   if (isDemoMode) {
     return {
       isLoaded: true,
@@ -11,13 +14,12 @@ export function useAppUser() {
     }
   }
   
-  // Dynamic import only when not in demo mode
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { useUser } = require('@clerk/nextjs')
-  return useUser()
+  return clerkUser
 }
 
 export function useAppAuth() {
+  const clerkAuth = useAuth()
+  
   if (isDemoMode) {
     return {
       isLoaded: true,
@@ -28,8 +30,5 @@ export function useAppAuth() {
     }
   }
   
-  // Dynamic import only when not in demo mode
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { useAuth } = require('@clerk/nextjs')
-  return useAuth()
+  return clerkAuth
 }

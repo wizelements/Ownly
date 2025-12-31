@@ -23,6 +23,7 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ownly/database exec prisma generate
       - run: pnpm lint
 
   typecheck:
@@ -38,6 +39,7 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ownly/database exec prisma generate
       - run: pnpm type-check
 
   test:

@@ -245,8 +245,8 @@ export const businessRouter = router({
         complianceFilings: complianceCount,
         upcomingFilings,
         recentActivity: [
-          ...recentActivity[0].map(i => ({ type: 'invoice', data: i })),
-          ...recentActivity[1].map(f => ({ type: 'filing', data: f })),
+          ...recentActivity[0].map((i: { createdAt: Date }) => ({ type: 'invoice' as const, data: i })),
+          ...recentActivity[1].map((f: { createdAt: Date }) => ({ type: 'filing' as const, data: f })),
         ]
           .sort(
             (a, b) =>
