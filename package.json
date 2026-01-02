@@ -2,6 +2,7 @@
   "name": "ownly",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.15.0",
   "description": "Modern SaaS starter kit with Next.js, tRPC, Prisma, and Tailwind",
   "keywords": [
     "llc",
