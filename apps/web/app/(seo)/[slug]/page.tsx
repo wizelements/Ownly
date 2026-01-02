@@ -134,7 +134,7 @@ export default function SEOPage({ params }: Props) {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               {isComparison 
                 ? `Looking for a ${page.keyword}? Ownly delivers the same features at a fraction of the cost. Next.js 14 + tRPC + Prisma, only $49.`
-                : `The production-ready ${page.keyword} with Next.js 14, tRPC, Prisma, and 14 shadcn/ui components. Ship your SaaS in days, not months.`
+                : `The production-ready ${page.keyword} with Next.js 14, tRPC, Prisma, and 24 shadcn/ui components. Ship your SaaS in days, not months.`
               }
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -214,7 +214,7 @@ export default function SEOPage({ params }: Props) {
                       ['Type-safe APIs (tRPC)', '✅', '❌ Most use REST'],
                       ['Demo Mode', '✅ Works instantly', '❌ Requires setup'],
                       ['Database Models', '13 production-ready', '5-8 basic'],
-                      ['UI Components', '14 shadcn/ui', 'Varies'],
+                      ['UI Components', '24 shadcn/ui', 'Varies'],
                       ['Refund Policy', '72 hours', '14-30 days'],
                     ].map(([feature, ownly, others], i) => (
                       <tr key={i} className="border-t">

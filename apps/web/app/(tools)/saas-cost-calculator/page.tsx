@@ -201,7 +201,7 @@ export default function SaaSCostCalculatorPage() {
                 'TypeScript in strict mode',
                 'tRPC end-to-end type-safe APIs',
                 '13 Prisma database models',
-                '14 shadcn/ui components',
+                '24 shadcn/ui components',
                 'Authentication with Clerk',
                 'Demo mode for instant testing',
                 'Dashboard layout with sidebar',

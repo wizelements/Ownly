@@ -45,7 +45,7 @@ export const SEO_PAGES = [
 ] as const
 
 export const FAQ_ITEMS = [
-  { q: 'What is Ownly Starter Kit?', a: 'Ownly is a production-ready Next.js 14 + tRPC + Prisma starter kit with 14 shadcn/ui components, 13 database models, and demo mode. It helps developers ship SaaS products in days instead of months.' },
+  { q: 'What is Ownly Starter Kit?', a: 'Ownly is a production-ready Next.js 14 + tRPC + Prisma starter kit with 24 shadcn/ui components, 13 database models, and demo mode. It helps developers ship SaaS products in days instead of months.' },
   { q: 'What technologies does Ownly use?', a: 'Ownly uses Next.js 14 (App Router), TypeScript, tRPC for type-safe APIs, Prisma ORM for database, Tailwind CSS, shadcn/ui components, and Clerk for authentication.' },
   { q: 'How much does Ownly cost?', a: 'Ownly Starter Kit costs $49 one-time. No subscriptions, no hidden fees. You get full source code and commercial license.' },
   { q: 'Is there a demo I can try?', a: 'Yes! Visit ownly-kit.vercel.app/dashboard to try the live demo. Demo mode is enabled so you can explore all features without setting up auth.' },
