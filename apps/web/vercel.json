@@ -4,5 +4,10 @@
   "buildCommand": "pnpm run build",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "regions": ["iad1"]
+  "regions": ["iad1"],
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_DEMO_MODE": "true"
+    }
+  }
 }
