@@ -48,7 +48,7 @@ Beautiful, accessible, ready to use:
 - **Command Palette** — Cmd+K search like the pros
 - **Dropdowns, Tabs, Cards** — All the building blocks
 
-### 🗄️ 13 Database Models (Prisma)
+### 🗄️ 15 Database Models (Prisma)
 
 The schema you'd end up building anyway:
 - Users, Profiles, Preferences
@@ -150,7 +150,7 @@ ownly/
 Everything you need to launch:
 - ✅ Full source code (no obfuscation)
 - ✅ 24 UI components
-- ✅ 13 database models
+- ✅ 15 database models
 - ✅ Demo mode (no setup required)
 - ✅ Setup documentation
 - ✅ Personal & commercial license
@@ -252,7 +252,7 @@ The production-ready Next.js + tRPC + Prisma foundation that lets you skip the s
 
 ### Short Description (for social/SEO)
 ```
-Complete SaaS starter kit with Next.js 14, tRPC, Prisma, 24 UI components, 13 database models, Clerk auth, and demo mode. Skip setup purgatory.
+Complete SaaS starter kit with Next.js 14, tRPC, Prisma, 24 UI components, 15 database models, Clerk auth, and demo mode. Skip setup purgatory.
 ```
 
 ### Tags (comma-separated)

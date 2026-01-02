@@ -60,7 +60,7 @@ Not just buttons and inputs. Real components:
 - Modal dialogs, dropdowns, command palettes
 - Accordions, tooltips, sheets, and more
 
-### 🗄️ 13 Database Models
+### 🗄️ 15 Database Models
 The schema you'd build anyway—already done:
 - Users with profiles and preferences
 - Teams and memberships

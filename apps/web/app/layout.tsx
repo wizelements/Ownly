@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Ownly Starter Kit — Ship Your SaaS in Days, Not Months',
-  description: 'Production-ready Next.js 14 + tRPC + Prisma foundation with 24 UI components, 13 database models, and demo mode. Skip setup, start building. $49 one-time.',
+  description: 'Production-ready Next.js 14 + tRPC + Prisma foundation with 24 UI components, 15 database models, and demo mode. Skip setup, start building. $49 one-time.',
   keywords: ['nextjs starter kit', 'saas boilerplate', 'trpc prisma', 'nextjs template', 'saas starter', 'react dashboard', 'typescript boilerplate', 'indie hacker tools'],
   authors: [{ name: 'Cod3BlackAgency' }],
   creator: 'Cod3BlackAgency',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     url: 'https://ownly-kit.vercel.app',
     siteName: 'Ownly Starter Kit',
     title: 'Ownly Starter Kit — Ship Your SaaS in Days',
-    description: 'Next.js 14 + tRPC + Prisma starter kit. 24 components, 13 DB models, demo mode included. $49 one-time.',
+    description: 'Next.js 14 + tRPC + Prisma starter kit. 24 components, 15 DB models, demo mode included. $49 one-time.',
     images: [
       {
         url: '/og-image.png',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Ownly Starter Kit — Ship Your SaaS in Days',
-    description: 'Next.js 14 + tRPC + Prisma foundation. 24 components, 13 models, demo mode. $49.',
+    description: 'Next.js 14 + tRPC + Prisma foundation. 24 components, 15 models, demo mode. $49.',
     images: ['/og-image.png'],
     creator: '@cod3black',
   },

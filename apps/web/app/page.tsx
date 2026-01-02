@@ -233,7 +233,7 @@ export default function HomePage() {
               />
               <FeatureCard
                 icon={<Database className="h-8 w-8 text-primary" />}
-                title="13 Database Models"
+                title="15 Database Models"
                 description="The schema you&apos;d build anyway. Users, teams, subscriptions, invoices, audit logs."
                 items={['Prisma ORM', 'PostgreSQL ready', 'Seed data included']}
               />
@@ -336,7 +336,7 @@ export default function HomePage() {
                 features={[
                   'Full source code',
                   '24 UI components',
-                  '13 database models',
+                  '15 database models',
                   'Demo mode included',
                   'Setup documentation',
                   'Commercial license',
