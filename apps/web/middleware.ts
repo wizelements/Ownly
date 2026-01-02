@@ -2,35 +2,71 @@ import { authMiddleware } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Demo mode: Skip Clerk auth when DEMO_MODE=true
 const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
 function demoMiddleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// This middleware protects all routes except the ones specified
 const clerkMiddleware = authMiddleware({
-  // Routes that can be accessed while signed out
   publicRoutes: [
     '/',
     '/sign-in(.*)',
     '/sign-up(.*)',
     '/api/webhooks(.*)',
     '/api/trpc(.*)',
+    '/api/indexnow',
+    
+    // SEO pages - all dynamic slug routes
+    '/nextjs-starter-kit',
+    '/saas-boilerplate',
+    '/nextjs-saas-template',
+    '/react-dashboard-template',
+    '/trpc-starter',
+    '/prisma-nextjs-template',
+    '/nextjs-14-boilerplate',
+    '/typescript-saas-starter',
+    '/nextjs-prisma-trpc',
+    '/indie-hacker-starter-kit',
+    '/solo-developer-saas-template',
+    '/micro-saas-boilerplate',
+    '/shipfast-alternative',
+    '/supastarter-alternative',
+    '/makerkit-alternative',
+    '/nextjs-subscription-payments-alternative',
+    '/ship-saas-fast',
+    '/build-saas-weekend',
+    '/saas-mvp-template',
+    '/fastest-way-build-saas',
+    '/shadcn-dashboard',
+    '/tailwind-saas-template',
+    '/clerk-nextjs-starter',
+    '/react-query-trpc-template',
+    '/cheap-saas-boilerplate',
+    '/affordable-nextjs-template',
+    '/budget-saas-starter',
+    
+    // Free tools
+    '/saas-cost-calculator',
+    '/tech-stack-generator',
+    
+    // SEO infrastructure
+    '/sitemap.xml',
+    '/robots.txt',
+    '/feed.xml',
   ],
-  // Routes that can always be accessed, and have
-  // no authentication information
   ignoredRoutes: [
     '/api/webhooks/clerk',
     '/api/webhooks/stripe',
+    '/sitemap.xml',
+    '/robots.txt',
+    '/feed.xml',
+    '/api/indexnow',
   ],
 })
 
 export default isDemoMode ? demoMiddleware : clerkMiddleware
 
 export const config = {
-  // Protects all routes, including api/trpc.
-  // See https://clerk.com/docs/references/nextjs/auth-middleware
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 }
