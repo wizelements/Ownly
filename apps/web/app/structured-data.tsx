@@ -5,7 +5,7 @@ export function StructuredData() {
     name: 'Ownly Starter Kit',
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Any',
-    description: 'Production-ready Next.js 14 + tRPC + Prisma SaaS starter kit with 14 UI components and 13 database models.',
+    description: 'Production-ready Next.js 14 + tRPC + Prisma SaaS starter kit with 24 UI components and 13 database models.',
     url: 'https://ownly-kit.vercel.app',
     offers: {
       '@type': 'Offer',

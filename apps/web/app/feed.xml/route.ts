@@ -25,7 +25,7 @@ export async function GET() {
     <item>
       <title>Ownly Starter Kit — Ship Your SaaS in Days</title>
       <link>${SITE_URL}</link>
-      <description>Production-ready Next.js 14 + tRPC + Prisma foundation with 14 UI components, 13 database models, and demo mode. Only $49.</description>
+      <description>Production-ready Next.js 14 + tRPC + Prisma foundation with 24 UI components, 13 database models, and demo mode. Only $49.</description>
       <pubDate>${new Date().toUTCString()}</pubDate>
       <guid>${SITE_URL}</guid>
     </item>

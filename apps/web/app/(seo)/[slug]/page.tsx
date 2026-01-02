@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {}
 
   const title = `${page.title} — Ownly | Ship SaaS in Days`
-  const description = `${page.h1}. Production-ready Next.js 14 + tRPC + Prisma foundation with 14 UI components. Only $49. Try the live demo.`
+  const description = `${page.h1}. Production-ready Next.js 14 + tRPC + Prisma foundation with 24 UI components. Only $49. Try the live demo.`
 
   return {
     title,

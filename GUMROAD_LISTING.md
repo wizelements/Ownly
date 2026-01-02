@@ -38,7 +38,7 @@ Clone it. Run it. Start building features on day one.
 
 ## What's Inside
 
-### 🎨 14 Production UI Components
+### 🎨 24 Production UI Components
 
 Beautiful, accessible, ready to use:
 - **Data Tables** — Sorting, filtering, pagination
@@ -149,7 +149,7 @@ ownly/
 
 Everything you need to launch:
 - ✅ Full source code (no obfuscation)
-- ✅ 14 UI components
+- ✅ 24 UI components
 - ✅ 13 database models
 - ✅ Demo mode (no setup required)
 - ✅ Setup documentation
@@ -252,7 +252,7 @@ The production-ready Next.js + tRPC + Prisma foundation that lets you skip the s
 
 ### Short Description (for social/SEO)
 ```
-Complete SaaS starter kit with Next.js 14, tRPC, Prisma, 14 UI components, 13 database models, Clerk auth, and demo mode. Skip setup purgatory.
+Complete SaaS starter kit with Next.js 14, tRPC, Prisma, 24 UI components, 13 database models, Clerk auth, and demo mode. Skip setup purgatory.
 ```
 
 ### Tags (comma-separated)

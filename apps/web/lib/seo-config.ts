@@ -58,7 +58,7 @@ export const FAQ_ITEMS = [
 ]
 
 export const FEATURES = [
-  { icon: 'layout', title: '14 UI Components', desc: 'Data tables, forms, modals, sidebars, command palettes' },
+  { icon: 'layout', title: '24 UI Components', desc: 'Data tables, forms, modals, sidebars, command palettes' },
   { icon: 'database', title: '13 Database Models', desc: 'Users, teams, subscriptions, invoices, audit logs' },
   { icon: 'lock', title: 'Auth Ready', desc: 'Demo mode + Clerk integration' },
   { icon: 'zap', title: 'Type-Safe APIs', desc: 'tRPC + React Query + Zod' },

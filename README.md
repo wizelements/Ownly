@@ -52,12 +52,13 @@ That's it. You're building.
 
 ## What's Inside the Box
 
-### 🎨 14 Production UI Components
+### 🎨 24 Production UI Components
 Not just buttons and inputs. Real components:
 - Data tables with sorting and filtering
 - Multi-step forms with validation
 - Dashboard layouts with responsive sidebars
 - Modal dialogs, dropdowns, command palettes
+- Accordions, tooltips, sheets, and more
 
 ### 🗄️ 13 Database Models
 The schema you'd build anyway—already done:
@@ -218,7 +219,7 @@ Commercial license — see [LICENSE](./LICENSE) for full terms.
 <p align="center">
   <strong>Stop setting up. Start shipping.</strong>
   <br><br>
-  <a href="https://ownly.gumroad.com/l/starter-kit"><strong>→ Get Ownly Starter Kit — $49</strong></a>
+  <a href="https://silverstream265.gumroad.com/l/ymzzb"><strong>→ Get Ownly Starter Kit — $49</strong></a>
   <br><br>
   Built by <a href="https://github.com/wizelements">Cod3BlackAgency</a>
 </p>

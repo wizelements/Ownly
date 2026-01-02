@@ -227,7 +227,7 @@ export default function HomePage() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <FeatureCard
                 icon={<Layout className="h-8 w-8 text-primary" />}
-                title="14 UI Components"
+                title="24 UI Components"
                 description="Data tables, forms, modals, sidebars, command palettes. Real components for real apps."
                 items={['Responsive dashboard layout', 'Multi-step form wizard', 'Command menu (Cmd+K)']}
               />
@@ -335,7 +335,7 @@ export default function HomePage() {
                 description="Everything you need to launch"
                 features={[
                   'Full source code',
-                  '14 UI components',
+                  '24 UI components',
                   '13 database models',
                   'Demo mode included',
                   'Setup documentation',
