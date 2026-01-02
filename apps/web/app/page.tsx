@@ -41,6 +41,9 @@ export default function HomePage() {
             <Link href="#pricing" className="text-sm font-medium hover:text-primary">
               Pricing
             </Link>
+            <Link href="/setup" className="text-sm font-medium hover:text-primary">
+              Setup Guide
+            </Link>
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/dashboard">

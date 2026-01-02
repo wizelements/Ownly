@@ -1,7 +1,7 @@
 import { SEO_PAGES, SITE_URL, SITE_NAME } from '@/lib/seo-config'
 
 export async function GET() {
-  const now = new Date().toISOString()
+  const _buildTime = new Date().toISOString()
   
   const items = SEO_PAGES.map(page => `
     <item>

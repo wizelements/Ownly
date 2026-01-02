@@ -3,7 +3,7 @@
  */
 
 export const APP_NAME = 'Ownly'
-export const APP_TAGLINE = 'Your entire business in one place — from LLC to $1M'
+export const APP_TAGLINE = 'Ship your SaaS in days, not months'
 
 /**
  * Pricing

@@ -11,6 +11,7 @@ function demoMiddleware(request: NextRequest) {
 const clerkMiddleware = authMiddleware({
   publicRoutes: [
     '/',
+    '/setup',
     '/sign-in(.*)',
     '/sign-up(.*)',
     '/api/webhooks(.*)',

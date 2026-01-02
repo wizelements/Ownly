@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Code2, Calculator, ArrowRight, CheckCircle2 } from 'lucide-react'
@@ -60,7 +59,7 @@ export default function SaaSCostCalculatorPage() {
               SaaS Development Cost Calculator
             </h1>
             <p className="text-xl text-muted-foreground">
-              Calculate how much time (and money) you're wasting on boilerplate code
+              Calculate how much time (and money) you&apos;re wasting on boilerplate code
             </p>
           </div>
 
@@ -194,7 +193,7 @@ export default function SaaSCostCalculatorPage() {
           {/* What You Get */}
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-center mb-8">
-              What's Included in Ownly (So You Don't Build It)
+              What&apos;s Included in Ownly (So You Don&apos;t Build It)
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {[
