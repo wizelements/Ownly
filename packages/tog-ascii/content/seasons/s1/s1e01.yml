@@ -1,0 +1,89 @@
+# Episode: The Table Is Set
+# Season 1, Episode 1 - FREE TIER
+
+id: s1e01
+title: "The Table Is Set"
+season: s1
+sequence: 1
+runtime_target: 120
+tier: free
+
+metadata:
+  created: "2025-01-10"
+  updated: "2025-01-10"
+  author: "TOG Creative"
+  version: "1.0.0"
+
+recap_hook: null  # First episode, no recap
+
+scenes:
+  - id: opener
+    template: opener
+    variant: standard
+    duration: 5000
+    
+  - id: title_card
+    template: title_card
+    duration: 4000
+    params:
+      title: "The Table Is Set"
+      subtitle: "Season 1 · Episode 1"
+      tagline: "Where flavor meets intention"
+      
+  - id: brand_intro
+    template: brand_intro
+    duration: 8000
+    params:
+      lines:
+        - "Taste of Gratitude."
+        - "Flavor-forward. Ingredient-led."
+        - "Every jar tells a story."
+        
+  - id: menu_showcase
+    template: menu_showcase
+    duration: 15000
+    params:
+      title: "The Menu"
+      products:
+        - name: "Lemon Ginger Gel"
+          sprite: lemon_ginger
+          price: "$8"
+        - name: "Hibiscus Berry Shot"
+          sprite: hibiscus
+          price: "$5"
+        - name: "Turmeric Golden Gel"
+          sprite: turmeric
+          price: "$8"
+        - name: "Basil Citrus Gel"
+          sprite: basil
+          price: "$8"
+          
+  - id: signature
+    template: signature_moment
+    duration: 8000
+    params:
+      type: logo_particle_reveal
+      particle_count: 40
+      
+  - id: qr_outro
+    template: qr_outro
+    duration: 6000
+    params:
+      url: "https://tasteofgratitude.shop"
+      cta: "Explore the full menu"
+      closing_text: "Thank you for watching"
+
+signature_moment:
+  type: logo_particle_reveal
+  description: "Particles converge to form the TOG jar silhouette"
+  duration: 8000
+  params:
+    particle_count: 40
+    color_scheme: warm
+    final_form: jar_silhouette
+
+outro:
+  next_episode:
+    id: s1e02
+    title: "Citrus & Ginger"
+    teaser: "Bright notes after every meal..."

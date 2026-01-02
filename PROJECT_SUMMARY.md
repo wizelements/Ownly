@@ -11,8 +11,7 @@ Your complete Ownly project structure has been created and is ready for developm
 ownly/
 ├── apps/                    # Application packages
 │   ├── web/                # Main Next.js web application
-│   ├── api/                # tRPC API server (ready to build)
-│   └── admin/              # Admin dashboard (ready to build)
+│   └── api/                # tRPC API server (ready to build)
 ├── packages/
 │   ├── database/           # Prisma schema & database client
 │   ├── ui/                 # Shared UI components (ready to build)

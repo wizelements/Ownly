@@ -1,0 +1,145 @@
+# Taste of Gratitude - ASCII Cinema Series Registry
+# Content Version: Tracks episode/content changes
+# Engine Version: Tracks player/CLI changes
+
+series_title: "Taste of Gratitude"
+tagline: "Flavor-forward. Ingredient-led. Gratitude-driven."
+content_version: "1.0.0"
+engine_version: "1.0.0"
+
+branding:
+  logo_text: "TASTE OF GRATITUDE"
+  opener_text: "Taste of Gratitude presents"
+  closer_text: "Thank you for watching"
+  accent_chars: ["◆", "◇", "●", "○", "▪", "▫"]
+  border_style: "rounded"
+
+defaults:
+  fps: 12
+  transition_duration: 500
+  text_speed: 50
+
+tiers:
+  free:
+    name: "Teaser"
+    description: "Sample the experience"
+  standard:
+    name: "Season Pass"
+    description: "Full Season 1 access"
+  premium:
+    name: "Collector's Edition"
+    description: "All content + extras + making-of"
+
+seasons:
+  - id: s1
+    name: "Season One: Foundations"
+    theme: "Introducing the TOG universe"
+    release_date: "2025-01-15"
+    episode_count: 6
+    
+    episodes:
+      - id: s1e01
+        title: "The Table Is Set"
+        logline: "Welcome to Taste of Gratitude—where flavor meets intention. Meet the menu."
+        runtime_target: 120
+        tier: free
+        is_new: true
+        scenes:
+          - opener
+          - title_card
+          - brand_intro
+          - menu_showcase
+          - qr_outro
+        signature_moment:
+          type: logo_particle_reveal
+          description: "Logo reveals with particles forming into jar silhouette"
+          
+      - id: s1e02
+        title: "Citrus & Ginger"
+        logline: "After every meal, a bright note. Lemon and ginger take the stage."
+        runtime_target: 100
+        tier: standard
+        is_new: true
+        scenes:
+          - opener
+          - title_card
+          - ingredient_spotlight_lemon
+          - ingredient_spotlight_ginger
+          - flavor_pairing
+          - menu_card
+          - qr_outro
+        signature_moment:
+          type: citrus_sunrise
+          description: "Lemon slice ASCII sunrise animation expanding from center"
+          
+      - id: s1e03
+        title: "Herbal Lines"
+        logline: "Basil, hibiscus, turmeric—nature's palette in a jar."
+        runtime_target: 110
+        tier: standard
+        is_new: true
+        scenes:
+          - opener
+          - title_card
+          - market_table
+          - ingredient_spotlight_basil
+          - ingredient_spotlight_hibiscus
+          - ingredient_spotlight_turmeric
+          - qr_outro
+        signature_moment:
+          type: growing_herbs
+          description: "Three herbs growing upward as ASCII stems with leaves"
+          
+      - id: s1e04
+        title: "Mineral Map"
+        logline: "Simple minerals, grounded choices. A visual journey."
+        runtime_target: 90
+        tier: standard
+        is_new: false
+        scenes:
+          - opener
+          - title_card
+          - mineral_constellation
+          - why_choose
+          - menu_card
+          - qr_outro
+        signature_moment:
+          type: constellation_map
+          description: "Constellation connecting mineral icons with dotted lines"
+          
+      - id: s1e05
+        title: "Market Day"
+        logline: "The vending cart rolls in. Community, convenience, connection."
+        runtime_target: 130
+        tier: standard
+        is_new: false
+        scenes:
+          - opener
+          - title_card
+          - market_arrival
+          - market_table
+          - interactive_menu
+          - community_moment
+          - qr_outro
+        signature_moment:
+          type: vending_reveal
+          description: "Vending machine ASCII opening with product reveal"
+          
+      - id: s1e06
+        title: "The Jar & The Shot"
+        logline: "From gel to liquid, from jar to shot glass—meet the full lineup."
+        runtime_target: 150
+        tier: premium
+        is_new: false
+        scenes:
+          - opener
+          - title_card
+          - product_showcase_gels
+          - product_showcase_shots
+          - jar_to_shot_morph
+          - full_menu
+          - premium_extras
+          - qr_outro
+        signature_moment:
+          type: morph_animation
+          description: "Side-by-side morphing: jar transforms into shot glass"

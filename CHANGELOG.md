@@ -126,7 +126,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module 6: Compliance Shield with automated reminders
 - E2E testing with Playwright
 - Unit testing with Vitest
-- Admin dashboard application
 - Mobile-responsive improvements
 
 ---

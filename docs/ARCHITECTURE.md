@@ -2,14 +2,14 @@
 
 ## System Overview
 
-Ownly is built as a modern monorepo using **Turborepo** with Next.js 15, tRPC, and Prisma for a fully type-safe full-stack application.
+Ownly is built as a modern monorepo using **Turborepo** with Next.js 14, tRPC, and Prisma for a fully type-safe full-stack application.
 
 ## High-Level Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                        Frontend Layer                        │
-│  (Next.js 15 App Router + React + Tailwind + shadcn/ui)    │
+│  (Next.js 14 App Router + React + Tailwind + shadcn/ui)    │
 └──────────────────────┬──────────────────────────────────────┘
                        │
                        │ tRPC (Type-safe API)
@@ -30,7 +30,7 @@ Ownly is built as a modern monorepo using **Turborepo** with Next.js 15, tRPC, a
 ## Tech Stack Details
 
 ### Frontend (`apps/web`)
-- **Framework**: Next.js 15 with App Router
+- **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS + shadcn/ui components
 - **State Management**: React Query (via tRPC) + Zustand
@@ -271,8 +271,7 @@ ownly/
 │   │   ├── app/          # App router pages
 │   │   ├── components/   # React components
 │   │   └── lib/          # Utilities
-│   ├── api/              # tRPC API server
-│   └── admin/            # Admin dashboard
+│   └── api/              # tRPC API server
 ├── packages/
 │   ├── database/         # Prisma schema
 │   ├── ui/               # Shared components

@@ -87,7 +87,6 @@ pnpm dev
 This will start:
 - **Web App**: http://localhost:3000
 - **API Server**: http://localhost:3001
-- **Admin Dashboard**: http://localhost:3002
 
 ## Project Structure
 
@@ -95,8 +94,7 @@ This will start:
 ownly/
 ├── apps/
 │   ├── web/              # Main customer-facing Next.js app
-│   ├── api/              # tRPC API server
-│   └── admin/            # Internal admin dashboard
+│   └── api/              # tRPC API server
 ├── packages/
 │   ├── database/         # Prisma schema & database utilities
 │   ├── ui/               # Shared UI components (shadcn/ui)
@@ -118,8 +116,6 @@ pnpm dev:web
 # Run only the API
 pnpm dev:api
 
-# Run only the admin dashboard
-pnpm dev:admin
 ```
 
 ### Database Operations

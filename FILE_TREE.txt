@@ -62,7 +62,6 @@ OWNLY PROJECT STRUCTURE
 │
 └── 📦 To Be Built
     ├── apps/api/                    ⏳ tRPC API server
-    ├── apps/admin/                  ⏳ Admin dashboard
     ├── packages/ui/                 ⏳ Shared components
     ├── packages/lib/                ⏳ Shared utilities
     ├── packages/config/             ⏳ Shared config

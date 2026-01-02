@@ -4,305 +4,392 @@ Straight answers to common questions about the Ownly Starter Kit.
 
 ---
 
-## Before You Buy
-
-### What exactly am I getting?
-
-You're getting the complete source code for a production-ready SaaS foundation:
-
-- **Frontend**: Next.js 14 app with landing page, dashboard, and 14 UI components
-- **Backend**: tRPC API server with type-safe endpoints
-- **Database**: 13 Prisma models (User, Team, Subscription, Invoice, etc.)
-- **Auth**: Clerk integration + demo mode for development
-- **CI/CD**: GitHub Actions workflows
-- **Docker**: Local development environment
-- **Documentation**: Architecture guides, deployment instructions
-
-This is not a hosted service. It's source code you download, customize, and deploy yourself.
-
-### Who is this for?
-
-**Good fit:**
-- Solo developers launching a SaaS product
-- Agencies building client projects
-- Teams that want to skip the setup phase
-- Developers learning modern full-stack patterns
-
-**Not a good fit:**
-- Non-developers looking for a no-code solution
-- Complete beginners who've never used React
-- Anyone expecting a finished, hosted product
-
-### How is this different from create-next-app?
-
-`create-next-app` gives you an empty canvas. You still need to:
-- Set up authentication
-- Design your database schema
-- Build dashboard layouts
-- Configure CI/CD
-- Create reusable components
-
-Ownly gives you all of that, already wired up and working together.
-
-### Can I see a demo before buying?
-
-Yes. The landing page at [your-demo-url] shows the UI, and you can explore the dashboard in demo mode. The full source code is only available after purchase.
-
----
-
-## Technical Questions
-
-### What's the tech stack?
-
-| Layer | Technology |
-|-------|------------|
-| Framework | Next.js 14 (App Router) |
-| Language | TypeScript (strict mode) |
-| API | tRPC |
-| Database | PostgreSQL + Prisma ORM |
-| Styling | Tailwind CSS + shadcn/ui |
-| Auth | Clerk |
-| Payments | Stripe (patterns included) |
-| State | React Query + Zustand |
-| Monorepo | Turborepo |
-| Package Manager | pnpm |
+## Getting Started
 
 ### Do I need Clerk to run this?
 
-No. Set `DEMO_MODE=true` in your environment and everything works without Clerk. This is great for:
-- Initial exploration
-- UI development
-- Testing features
-- Demos and presentations
+**No.** Set `DEMO_MODE=true` in your `.env.local` and everything works without Clerk. This is perfect for:
+
+- Initial exploration and testing
+- UI development and prototyping
+- Demos and client presentations
+- Learning the codebase
 
 When you're ready for production, create a free Clerk account and add your keys.
 
-### Can I use a different database?
+### What are the system requirements?
 
-Yes. Prisma supports:
-- PostgreSQL (recommended)
-- MySQL
-- SQLite
-- SQL Server
-- MongoDB
-- CockroachDB
+| Requirement | Minimum | Recommended |
+|-------------|---------|-------------|
+| Node.js | 18.x | 20.x LTS |
+| pnpm | 8.x | Latest |
+| RAM | 4GB | 8GB+ |
+| Disk | 500MB | 2GB+ |
+| PostgreSQL | 14+ | 15+ |
 
-PostgreSQL is recommended because that's what the schema is optimized for. Free hosting options: Neon, Supabase, Railway.
+**Also needed:**
+- Docker (for local database)
+- Git
 
-### Can I swap out Clerk for another auth provider?
+**Operating systems:** macOS, Linux, Windows (WSL2 recommended)
 
-Yes, but it requires some work. The auth logic is centralized, so you'd need to:
-1. Replace the Clerk SDK with your preferred provider
-2. Update the middleware and protected routes
-3. Adjust the user model if needed
+### How long does setup take?
 
-Popular alternatives: NextAuth.js, Auth0, Supabase Auth, Firebase Auth.
-
-### Is Stripe integration included?
-
-Stripe patterns and webhook handlers are included. You'll need to:
-1. Create a Stripe account
-2. Add your API keys to `.env.local`
-3. Set up products/prices in Stripe Dashboard
-4. Customize the checkout flow for your product
-
----
-
-## Setup & Deployment
-
-### How do I run this locally?
+**5 minutes if you follow the quick start.**
 
 ```bash
-# Clone and install
 git clone https://github.com/yourusername/ownly.git
 cd ownly
-pnpm install
-
-# Set up environment (demo mode works out of the box)
+pnpm install          # ~2 minutes
 cp .env.example .env.local
-
-# Start database
-docker-compose up -d
-
-# Push schema and seed data
-pnpm db:push
-pnpm db:seed
-
-# Launch
-pnpm dev
+docker-compose up -d  # ~30 seconds
+pnpm db:push && pnpm db:seed  # ~30 seconds
+pnpm dev              # Running
 ```
 
-Visit `http://localhost:3000` — you're running.
-
-### What environment variables are required?
-
-**For development (demo mode):**
-```env
-DATABASE_URL="postgresql://..."
-DEMO_MODE="true"
-```
-
-**For production:**
-```env
-DATABASE_URL="postgresql://..."
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_live_..."
-CLERK_SECRET_KEY="sk_live_..."
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_live_..."
-STRIPE_SECRET_KEY="sk_live_..."
-STRIPE_WEBHOOK_SECRET="whsec_..."
-```
-
-### How do I deploy to production?
-
-**Recommended stack:**
-- **Frontend**: Vercel (zero-config Next.js hosting)
-- **Database**: Neon, Supabase, or Railway
-- **Redis**: Upstash (if needed)
-
-**Quick deploy:**
-1. Push your code to GitHub
-2. Import the project in Vercel
-3. Set environment variables
-4. Deploy
-
-Detailed instructions in `docs/DEPLOYMENT_GUIDE.md`.
+First-time `pnpm install` takes longest due to dependency downloads. Subsequent installs are cached.
 
 ---
 
-## Customization
+## Technical
 
-### How do I change the branding?
+### Can I use a different database?
 
-1. **Colors**: Edit `apps/web/tailwind.config.ts`
-2. **Logo**: Replace the icon in the header component
-3. **Copy**: Update text in `apps/web/app/page.tsx`
-4. **Name**: Find-and-replace "Ownly" with your product name
+**Yes.** Prisma supports multiple databases:
+
+| Database | Status | Notes |
+|----------|--------|-------|
+| PostgreSQL | ✅ Recommended | Schema optimized for this |
+| MySQL | ✅ Supported | Minor schema adjustments needed |
+| SQLite | ✅ Supported | Good for prototyping |
+| SQL Server | ✅ Supported | Enterprise environments |
+| MongoDB | ⚠️ Possible | Requires schema rewrite |
+| CockroachDB | ✅ Supported | Distributed PostgreSQL |
+
+**To switch:** Update the `provider` in `packages/database/prisma/schema.prisma` and your `DATABASE_URL`.
+
+**Free PostgreSQL hosting:** Neon, Supabase, Railway, Render.
 
 ### How do I add new pages?
 
-Create a new file in `apps/web/app/`:
+Create a new folder with `page.tsx` in `apps/web/app/`:
 
 ```
 apps/web/app/
-├── page.tsx           # Landing page (/)
+├── page.tsx              # / (landing)
 ├── dashboard/
-│   └── page.tsx       # Dashboard (/dashboard)
-├── settings/
-│   └── page.tsx       # Settings (/settings)  ← add this
+│   └── page.tsx          # /dashboard
+├── pricing/              # ← Create this folder
+│   └── page.tsx          # /pricing
+└── blog/
+    ├── page.tsx          # /blog
+    └── [slug]/
+        └── page.tsx      # /blog/:slug
 ```
 
-### How do I add new API routes?
+**Protected pages:** Wrap with the auth check from `lib/auth`:
 
-1. Create a router in `apps/api/src/routers/`:
+```tsx
+import { requireAuth } from '@/lib/auth';
+
+export default async function SettingsPage() {
+  await requireAuth();
+  return <div>Settings content</div>;
+}
+```
+
+### How do I add new API endpoints?
+
+**1. Create a router** in `apps/api/src/routers/`:
 
 ```typescript
 // apps/api/src/routers/products.ts
-import { router, protectedProcedure } from '../trpc';
+import { router, protectedProcedure, publicProcedure } from '../trpc';
 import { z } from 'zod';
 
 export const productsRouter = router({
-  list: protectedProcedure.query(async ({ ctx }) => {
+  list: publicProcedure.query(async ({ ctx }) => {
     return ctx.db.product.findMany();
   }),
   
   create: protectedProcedure
-    .input(z.object({ name: z.string() }))
+    .input(z.object({ 
+      name: z.string().min(1),
+      price: z.number().positive() 
+    }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.product.create({ data: input });
     }),
 });
 ```
 
-2. Add to the main router in `apps/api/src/routers/index.ts`
-
-3. Use in your frontend:
+**2. Register it** in `apps/api/src/routers/index.ts`:
 
 ```typescript
-const { data } = trpc.products.list.useQuery();
+import { productsRouter } from './products';
+
+export const appRouter = router({
+  // ...existing routers
+  products: productsRouter,
+});
 ```
 
-### How do I modify the database schema?
+**3. Use in your frontend:**
 
-1. Edit `packages/database/prisma/schema.prisma`
-2. Run `pnpm db:push` (development) or `pnpm db:migrate` (production)
-3. The Prisma client regenerates automatically
+```typescript
+// Query
+const { data, isLoading } = trpc.products.list.useQuery();
+
+// Mutation
+const createProduct = trpc.products.create.useMutation();
+await createProduct.mutateAsync({ name: 'Widget', price: 29.99 });
+```
+
+### What testing framework is used?
+
+| Type | Framework | Location |
+|------|-----------|----------|
+| Unit | Vitest | `*.test.ts` files |
+| Integration | Vitest | `*.test.ts` files |
+| E2E | Playwright | `e2e/` directory |
+
+**Running tests:**
+
+```bash
+pnpm test           # Run all unit/integration tests
+pnpm test:watch     # Watch mode
+pnpm test:e2e       # Run Playwright E2E tests
+pnpm test:coverage  # Generate coverage report
+```
+
+**Example test:**
+
+```typescript
+import { describe, it, expect } from 'vitest';
+
+describe('formatCurrency', () => {
+  it('formats USD correctly', () => {
+    expect(formatCurrency(29.99)).toBe('$29.99');
+  });
+});
+```
 
 ---
 
-## Licensing & Support
+## Payments
 
-### What's the license?
+### Is Stripe integration included?
 
-Commercial license. You can:
-- ✅ Use for personal projects
-- ✅ Use for commercial SaaS products
-- ✅ Modify and customize the code
+**Yes, patterns and infrastructure are included.** You get:
+
+- ✅ Webhook handler setup
+- ✅ Checkout session creation
+- ✅ Subscription management logic
+- ✅ Invoice tracking models
+- ✅ Customer portal integration pattern
+
+**To activate:**
+
+1. Create a Stripe account at [stripe.com](https://stripe.com)
+2. Add your keys to `.env.local`:
+
+```env
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_..."
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+```
+
+3. Create products/prices in Stripe Dashboard
+4. Update the price IDs in your checkout code
+
+### Can I use a different payment provider?
+
+**Yes.** The payment logic is modular. To swap providers:
+
+1. Replace the Stripe SDK with your provider (Paddle, LemonSqueezy, PayPal, etc.)
+2. Update the webhook handler in `apps/api/src/webhooks/`
+3. Adjust the checkout flow in `apps/web/`
+
+The database models (Subscription, Invoice, Payment) are provider-agnostic.
+
+---
+
+## Deployment
+
+### How do I deploy to Vercel?
+
+**One-click deploy:**
+
+1. Push your code to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new)
+3. Import your repository
+4. Add environment variables:
+
+```
+DATABASE_URL=postgresql://...
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
+CLERK_SECRET_KEY=sk_live_...
+```
+
+5. Click Deploy
+
+**That's it.** Vercel auto-detects Next.js and configures everything.
+
+See `docs/DEPLOYMENT_GUIDE.md` for detailed instructions.
+
+### Can I deploy elsewhere?
+
+**Yes.** Ownly works anywhere Node.js runs:
+
+| Platform | Complexity | Notes |
+|----------|-----------|-------|
+| Vercel | ⭐ Easiest | Zero-config Next.js hosting |
+| Netlify | ⭐ Easy | Good alternative to Vercel |
+| Railway | ⭐ Easy | App + database in one place |
+| Render | ⭐ Easy | Free tier available |
+| Fly.io | ⭐⭐ Medium | Edge deployment |
+| AWS (Amplify) | ⭐⭐ Medium | Enterprise scale |
+| DigitalOcean | ⭐⭐ Medium | App Platform or Droplets |
+| Self-hosted | ⭐⭐⭐ Advanced | Docker + reverse proxy |
+
+**Docker deployment:**
+
+```bash
+docker build -t ownly .
+docker run -p 3000:3000 ownly
+```
+
+---
+
+## License & Usage
+
+### Can I use this for client projects?
+
+**Yes.** You can build unlimited applications for clients. Each project you build is yours (or your client's) to own and operate.
+
+What you're licensed to do:
+- ✅ Build SaaS products for clients
+- ✅ Charge clients for the apps you build
+- ✅ Modify all source code
+- ✅ Deploy anywhere
 - ✅ Create unlimited projects
-- ✅ Use in client work (with Team license)
 
-You cannot:
-- ❌ Resell the source code as-is
+### Can I resell the template?
+
+**No.** You cannot:
+
+- ❌ Resell Ownly as a template/starter kit
+- ❌ Redistribute the source code
+- ❌ Create competing boilerplate products
 - ❌ Share your license with others
-- ❌ Remove the license file
+- ❌ Publish under an open-source license
 
-Full terms in [LICENSE](../LICENSE).
+**The distinction:** You can sell *products built with* Ownly. You cannot sell *Ownly itself*.
 
-### Is there a refund policy?
+### What's included in updates?
+
+Updates are pushed to the GitHub repository and include:
+
+| Update Type | Frequency | Example |
+|-------------|-----------|---------|
+| Security patches | As needed | Dependency vulnerabilities |
+| Bug fixes | Weekly | Edge case fixes |
+| Dependency updates | Monthly | Next.js, Prisma versions |
+| New features | Quarterly | New components, patterns |
+
+**To get updates:**
+
+```bash
+git remote add upstream https://github.com/wizelements/Ownly.git
+git fetch upstream
+git merge upstream/main
+```
+
+Pro and Team tiers get early access to new features.
+
+---
+
+## Support
+
+### Where do I get help?
+
+| Tier | Support Channel | Response Time |
+|------|-----------------|---------------|
+| Starter | GitHub Issues | Community-based |
+| Pro | Priority email | 24-48 hours |
+| Team | Private Discord + call | Same day |
+
+**Self-service resources:**
+- `/docs` folder in the codebase
+- GitHub Discussions
+- README and inline code comments
+
+### How do I report bugs?
+
+1. Check existing [GitHub Issues](https://github.com/wizelements/Ownly/issues)
+2. If new, create an issue with:
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Environment (OS, Node version, etc.)
+   - Error messages/screenshots
+
+**Template:**
+
+```markdown
+**Bug:** [Brief description]
+**Steps:** 1. ... 2. ... 3. ...
+**Expected:** ...
+**Actual:** ...
+**Environment:** Node 20.x, macOS 14, pnpm 8.x
+```
+
+### Is there a community?
+
+**Yes:**
+
+- **GitHub Discussions** — Q&A and feature requests
+- **Discord** (Team tier) — Private channel with direct access
+- **Twitter/X** — Follow [@wizelements](https://twitter.com/wizelements) for updates
+
+---
+
+## Refund Policy
+
+### What's the refund policy?
 
 **72 hours, no questions asked.**
 
-If Ownly doesn't meet your expectations, email within 72 hours for a full refund. After 72 hours, refunds aren't available — it's source code, and once you have it, you have it.
+If Ownly doesn't meet your expectations, email within 72 hours of purchase for a full refund.
 
-### How do I get support?
+**The fine print:**
+- Refunds processed within 5 business days
+- After 72 hours, refunds aren't available (it's source code — once downloaded, you have it)
+- Chargebacks without contacting us first may result in license termination
 
-- **Starter tier**: Community support (GitHub Discussions)
-- **Pro tier**: Priority email support
-- **Team tier**: Private Discord + 30-min consultation
-
-### Will there be updates?
-
-Yes. Updates include:
-- Bug fixes
-- Dependency updates
-- New components and features
-
-Pro and Team tiers get early access. Star the GitHub repo for notifications.
+**We're confident you'll find value**, but we understand if it's not the right fit.
 
 ---
 
-## Troubleshooting
+## Quick Reference
 
-### "Cannot connect to database"
-
-1. Check that Docker is running: `docker ps`
-2. Verify `DATABASE_URL` in `.env.local`
-3. Run `docker-compose up -d` to start containers
-
-### "Clerk authentication error"
-
-1. Verify your Clerk keys are correct (check for typos)
-2. Make sure keys match your Clerk application
-3. Try `DEMO_MODE=true` to bypass auth for development
-
-### "Module not found" errors
-
-1. Run `pnpm install` from the root directory
-2. If that fails: `rm -rf node_modules && pnpm install`
-3. Make sure you're using pnpm, not npm or yarn
-
-### "Prisma client not generated"
-
-1. Run `pnpm db:push` to regenerate the client
-2. Or run `pnpm prisma generate` directly
-3. Restart your dev server after regenerating
+| Question | Short Answer |
+|----------|--------------|
+| Need Clerk? | No, use `DEMO_MODE=true` |
+| Different database? | Yes, Prisma supports MySQL, SQLite, etc. |
+| Stripe required? | No, patterns included — add your keys |
+| Deploy to Vercel? | Yes, one-click deploy |
+| Client projects? | Yes, unlimited |
+| Resell template? | No |
+| Refund window? | 72 hours |
+| Support? | GitHub Issues, email (Pro), Discord (Team) |
 
 ---
 
 ## Still Have Questions?
 
-- Check the `/docs` folder for detailed guides
-- Open an issue on GitHub
-- Email support (Pro/Team tiers)
+- **Docs:** Check the `/docs` folder
+- **Issues:** [GitHub Issues](https://github.com/wizelements/Ownly/issues)
+- **Email:** support@ownly.dev
 
 ---
 

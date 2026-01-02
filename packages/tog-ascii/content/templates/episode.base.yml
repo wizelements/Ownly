@@ -1,0 +1,69 @@
+# Episode Base Template
+# Copy this file to create new episodes
+
+id: s1eXX  # Format: s{season}e{episode}
+title: "Episode Title"
+season: s1
+sequence: 1  # Episode number in season
+runtime_target: 120  # Target duration in seconds
+tier: standard  # free | standard | premium
+
+metadata:
+  created: ""
+  updated: ""
+  author: "TOG Creative"
+  version: "1.0.0"
+
+# Optional: Hook text shown before episode starts
+recap_hook: null
+
+# Scene list - order matters
+scenes:
+  # REQUIRED: Every episode must start with opener
+  - id: opener
+    template: opener
+    variant: standard
+    duration: 5000
+    
+  # REQUIRED: Title card
+  - id: title_card
+    template: title_card
+    duration: 4000
+    params:
+      title: "{{EPISODE_TITLE}}"
+      subtitle: "Season X · Episode X"
+      tagline: ""
+      
+  # ADD YOUR SCENES HERE
+  # Available templates:
+  # - ingredient_spotlight
+  # - market_table
+  # - menu_showcase
+  # - why_choose
+  # - product_showcase
+  # - interactive_menu
+  # - brand_intro
+  # - signature_moment
+  
+  # REQUIRED: Every episode must end with outro
+  - id: qr_outro
+    template: qr_outro
+    duration: 6000
+    params:
+      url: "https://tasteofgratitude.shop"
+      cta: "Explore the menu"
+      closing_text: "Thank you for watching"
+
+# Signature moment - the standout animation for this episode
+signature_moment:
+  type: ""  # Unique animation type
+  description: ""
+  duration: 8000
+  params: {}
+
+# Next episode teaser
+outro:
+  next_episode:
+    id: ""
+    title: ""
+    teaser: ""

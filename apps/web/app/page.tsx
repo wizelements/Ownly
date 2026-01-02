@@ -46,7 +46,7 @@ export default function HomePage() {
             <Link href="/dashboard">
               <Button variant="ghost">Demo</Button>
             </Link>
-            <Link href="https://ownly.gumroad.com/l/starter-kit" target="_blank">
+            <Link href="https://silverstream265.gumroad.com/l/ymzzb" target="_blank">
               <Button>Get the Kit</Button>
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default function HomePage() {
             </p>
             
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Link href="https://ownly.gumroad.com/l/starter-kit" target="_blank">
+              <Link href="https://silverstream265.gumroad.com/l/ymzzb" target="_blank">
                 <Button size="lg" className="w-full sm:w-auto">
                   Get the Starter Kit — $49
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -416,7 +416,7 @@ export default function HomePage() {
               <p className="text-lg text-muted-foreground mb-8">
                 Join developers who are building products while others are still setting up auth.
               </p>
-              <Link href="https://ownly.gumroad.com/l/starter-kit" target="_blank">
+              <Link href="https://silverstream265.gumroad.com/l/ymzzb" target="_blank">
                 <Button size="lg">
                   Get Ownly Starter Kit — $49
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -545,7 +545,7 @@ function PricingCard({
           </li>
         ))}
       </ul>
-      <Link href="https://ownly.gumroad.com/l/starter-kit" target="_blank">
+      <Link href="https://silverstream265.gumroad.com/l/ymzzb" target="_blank">
         <Button className="w-full" variant={popular ? 'default' : 'outline'}>
           Get {name}
         </Button>
