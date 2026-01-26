@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@ownly/database": "workspace:*",
-    "@trpc/server": "^10.45.0",
+    "@trpc/server": "^10.45.4",
     "@clerk/backend": "^0.38.4",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "zod": "^3.22.4",
