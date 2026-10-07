@@ -1,227 +1,146 @@
-# Ownly Starter Kit
+# Ownly — Reusable SaaS Starter Foundation
 
-![CI](https://github.com/wizelements/Ownly/actions/workflows/ci.yml/badge.svg)
-![CodeQL](https://github.com/wizelements/Ownly/actions/workflows/codeql.yml/badge.svg)
+A reusable full-stack SaaS foundation for teams that want to start from working product infrastructure instead of rebuilding common application plumbing.
 
-> **Ship your SaaS in days, not months.**
+**Live demo:** https://ownly-kit.vercel.app
 
----
+![Ownly product preview](apps/web/public/og-image.png)
 
-## The Problem We Solve
+[![CI](https://github.com/wizelements/Ownly/actions/workflows/ci.yml/badge.svg)](https://github.com/wizelements/Ownly/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/wizelements/Ownly/actions/workflows/codeql.yml/badge.svg)](https://github.com/wizelements/Ownly/actions/workflows/codeql.yml)
 
-You've got the idea. The vision. Maybe even the first paying customer in your head.
+> **Status:** Retained reusable product asset. The demo returned HTTP 200 on **October 7, 2026**. This repository is intentionally described by verified implementation rather than unsupported customer quotes, time-saved claims, or blanket “production-ready” language.
 
-But then reality hits:
+## What it provides
 
-- Setting up auth takes a week
-- Database schemas become a rabbit hole
-- "Just one more config file" turns into three
-- That beautiful dashboard you imagined? Still a Figma mockup
+Ownly packages recurring SaaS concerns into a monorepo that can be adapted for new products:
 
-**You're a builder, not a boilerplate wrangler.**
+- Next.js application shell and dashboard surfaces;
+- Clerk authentication integration;
+- tRPC client/server patterns;
+- Prisma data layer with PostgreSQL-oriented schema;
+- reusable UI and form patterns;
+- Stripe integration dependencies/patterns;
+- shared packages through Turborepo;
+- Playwright browser tests;
+- CI, CodeQL, scheduled E2E, and preview-deployment workflows.
 
-That's where Ownly comes in.
+It is a **foundation**, not a finished hosted business.
 
----
+## Architecture
 
-## What If You Could Start Building Features on Day One?
-
-Ownly is a production-ready SaaS foundation that handles the boring stuff so you can focus on what matters: **your product**.
-
-```bash
-git clone && pnpm install && pnpm dev
+```mermaid
+flowchart LR
+    U[User] --> W[Next.js web app]
+    W --> C[Clerk auth]
+    W --> T[tRPC layer]
+    T --> P[Prisma]
+    P --> DB[(PostgreSQL)]
+    W --> S[Stripe integration surface]
+    W --> UI[Reusable UI / product modules]
+    CI[GitHub Actions] --> W
+    CI --> E2E[Playwright]
 ```
 
-That's it. You're building.
+## Repository structure
 
----
-
-## The Stack (Battle-Tested)
-
-| Layer | Technology | Why It's Here |
-|-------|------------|---------------|
-| **Framework** | Next.js 14 (App Router) | The industry standard |
-| **API** | tRPC | End-to-end TypeScript, zero codegen |
-| **Database** | Prisma + PostgreSQL | Type-safe queries, easy migrations |
-| **Auth** | Clerk | Social login, MFA, passkeys—out of the box |
-| **Styling** | Tailwind + shadcn/ui | Beautiful, accessible, customizable |
-| **Payments** | Stripe-ready | Webhook handlers included |
-| **Monorepo** | Turborepo | Fast builds, shared packages |
-
----
-
-## What's Inside the Box
-
-### 🎨 24 Production UI Components
-Not just buttons and inputs. Real components:
-- Data tables with sorting and filtering
-- Multi-step forms with validation
-- Dashboard layouts with responsive sidebars
-- Modal dialogs, dropdowns, command palettes
-- Accordions, tooltips, sheets, and more
-
-### 🗄️ 15 Database Models
-The schema you'd build anyway—already done:
-- Users with profiles and preferences
-- Teams and memberships
-- Subscriptions and billing
-- Invoices and payments
-- Audit logs
-
-### 🔐 Authentication That Just Works
-Demo mode for development. Clerk for production. Switch with one env variable.
-
-### 📦 Monorepo Structure
-```
-ownly/
+```text
+Ownly/
 ├── apps/
-│   ├── web/          # Your Next.js app
-│   └── api/          # tRPC server
+│   └── web/              # Next.js application
 ├── packages/
-│   ├── database/     # Prisma schema & client
-│   └── lib/          # Shared utilities
-└── docs/             # You're reading them
+│   ├── database/         # Prisma schema/client
+│   └── ...               # Shared packages
+├── e2e/                  # Browser/API verification
+├── .github/workflows/    # CI, CodeQL, preview, scheduled E2E
+└── docs/                 # Supporting product documentation
 ```
 
----
+## Verified technology baseline
 
-## Quick Start
+| Layer | Current repository evidence |
+| --- | --- |
+| Framework | Next.js 14.1 + React 18 |
+| API | tRPC 10 |
+| Data | Prisma + PostgreSQL-oriented schema |
+| Authentication | Clerk integration |
+| UI | Tailwind CSS + Radix-based components |
+| Payments | Stripe libraries/integration patterns |
+| Monorepo | Turborepo + pnpm workspaces |
+| Verification | CI, Playwright E2E, URL checks, Lighthouse workflow |
+| Security scanning | GitHub CodeQL workflow |
 
-### Prerequisites
+## Clean setup
+
+### Requirements
+
 - Node.js 20+
 - pnpm 8+
-- PostgreSQL (or Docker)
-
-### Get Running in 5 Minutes
+- PostgreSQL for database-backed development
 
 ```bash
-# Clone it
-git clone https://github.com/yourusername/ownly.git
-cd ownly
-
-# Install dependencies
-pnpm install
-
-# Set up environment (demo mode works out of the box)
+git clone https://github.com/wizelements/Ownly.git
+cd Ownly
+pnpm install --frozen-lockfile
 cp .env.example .env.local
-
-# Start the database
-docker-compose up -d
-
-# Push schema & seed data
 pnpm db:push
 pnpm db:seed
-
-# Launch
 pnpm dev
 ```
 
-Open [localhost:3000](http://localhost:3000). You're in business.
+Use demo/development configuration only as documented by the current code. Do not treat development bypasses as production authentication.
 
----
+## Quality gates
 
-## Who Is This For?
-
-### ✅ Perfect If You're...
-- A solo developer launching your first SaaS
-- An agency that needs a reusable client template
-- A team that wants to skip the setup phase
-- Someone learning modern full-stack patterns
-
-### ❌ Not For You If...
-- You need a no-code solution (this is for developers)
-- You want a finished, hosted product (this is source code)
-- You've never touched React (you'll struggle)
-
----
-
-## What Developers Are Building
-
-> "Saved me at least 40 hours on the auth and database setup alone."
-> — *Solo founder shipping a B2B tool*
-
-> "We use this as our base template for all client projects now."
-> — *Agency with 3 devs*
-
-> "Finally, a starter that doesn't feel like it was abandoned in 2021."
-> — *Developer on Indie Hackers*
-
----
-
-## Development Workflow
+Primary repository checks include:
 
 ```bash
-# Run everything
-pnpm dev
-
-# Run specific apps
-pnpm dev:web
-pnpm dev:api
-
-# Database operations
-pnpm db:push      # Push schema changes
-pnpm db:studio    # Visual database browser
-pnpm db:seed      # Add sample data
-
-# Quality checks
-pnpm lint         # ESLint
-pnpm type-check   # TypeScript
-pnpm build        # Production build
+pnpm lint
+pnpm type-check
+pnpm test
+pnpm test:urls
+pnpm test:e2e:chromium
+pnpm build
 ```
 
----
+The CI workflow also runs multi-browser E2E on main pushes and a non-blocking dependency audit. CodeQL is configured separately.
 
-## Frequently Asked Questions
+A badge indicates workflow state, not product fitness for a specific customer's production requirements.
 
-**Do I need Clerk to run this?**  
-No. Set `DEMO_MODE=true` and you're good. Add Clerk when you're ready for production.
+## Security
 
-**Can I use a different database?**  
-Yes. Prisma supports MySQL, SQLite, SQL Server, and more. PostgreSQL is recommended.
+See [SECURITY.md](SECURITY.md).
 
-**What about payments?**  
-Stripe integration patterns are included. Add your keys and you're processing payments.
+Applications derived from Ownly inherit responsibility for their own:
 
-**Is there a refund policy?**  
-72 hours, no questions asked. See [LICENSE](./LICENSE) for details.
+- authorization model and tenancy boundaries;
+- production secrets;
+- Stripe/webhook verification;
+- database backups/migrations;
+- privacy/data-retention obligations;
+- monitoring and incident response.
 
----
-
-## What's Next?
-
-1. **Explore the codebase** — Start with `apps/web/app/page.tsx`
-2. **Read the docs** — Check out `/docs` for architecture and guides
-3. **Make it yours** — Update colors, copy, and branding
-4. **Ship it** — Deploy to Vercel in one click
-
----
+A starter kit cannot prove those controls for an application that has not been built yet.
 
 ## License
 
-Commercial license — see [LICENSE](./LICENSE) for full terms.
+Ownly uses a **commercial source license**, not an open-source license. See [LICENSE](LICENSE) before reuse or distribution.
 
-**You can:**
-- ✅ Use for personal projects
-- ✅ Use for commercial products
-- ✅ Modify and customize everything
-- ✅ Create unlimited projects
+The license file currently contains a governing-law placeholder. That legal/business choice should be finalized before relying on the license for new commercial distribution.
+
+## Known limitations / boundaries
+
+- This repository is a reusable foundation, not a guarantee that every derived application is production-ready.
+- Production Clerk, Stripe, database, and deployment configuration require real external accounts/credentials.
+- Security and compliance requirements vary by the product built from the starter.
+- Prior marketing copy contained example testimonials and quantified value claims that were not supported by repository evidence; those claims are intentionally not used here.
+- Commercial license jurisdiction remains an explicit business/legal decision to finalize.
+
+## Business value
+
+Ownly is reusable delivery leverage: common SaaS infrastructure can be carried forward instead of rebuilt for every client or product. Its value is measured by **reduced repeated implementation work and faster path to application-specific features**, with actual savings measured per engagement rather than invented in advance.
 
 ---
 
-## Support
-
-- **Docs**: See the `/docs` folder
-- **Issues**: [GitHub Issues](https://github.com/wizelements/Ownly/issues)
-- **Updates**: Star the repo to stay current
-
----
-
-<p align="center">
-  <strong>Stop setting up. Start shipping.</strong>
-  <br><br>
-  <a href="https://silverstream265.gumroad.com/l/ymzzb"><strong>→ Get Ownly Starter Kit — $49</strong></a>
-  <br><br>
-  Built by <a href="https://github.com/wizelements">Cod3BlackAgency</a>
-</p>
-
-# Force rebuild Fri Jan  2 10:16:42 EST 2026
+**Cod3Black Agency / wizelements**  
+**Last portfolio verification:** October 7, 2026
